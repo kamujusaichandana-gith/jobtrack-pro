@@ -1,1 +1,52 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: light;
+  font-family: 'Avenir Next', Avenir, 'Segoe UI', sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --ink: #18332d;
+  --muted: #71817b;
+  --line: #e1e9e4;
+  --surface: #ffffff;
+  --canvas: #f3f7f3;
+  --green: #23735a;
+  --green-soft: #e3f2e9;
+  --mint: #9bd1ad;
+  --orange: #e48b5c;
+  --blue: #6e9bc7;
+  --red: #cd746c;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--canvas);
+  color: var(--ink);
+}
+
+main {
+  width: min(1280px, 100%);
+  margin: 0 auto;
+  padding: 38px 32px 64px;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 640px) {
+  main {
+    padding: 28px 18px 48px;
+  }
+}

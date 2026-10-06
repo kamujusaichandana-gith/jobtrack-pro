@@ -1,0 +1,61 @@
+{
+  "applications": [
+    {
+      "id": "1",
+      "company": "KY",
+      "position": "Software Developer",
+      "location": "Woodbridge, NJ",
+      "status": "Interview",
+      "dateApplied": "2026-09-29"
+    },
+    {
+      "id": "2",
+      "company": "JPMorgan Chase",
+      "position": "Frontend Developer",
+      "location": "Plano, TX",
+      "status": "Interview",
+      "dateApplied": "2026-09-25"
+    },
+    {
+      "id": "7MITw62vSdk",
+      "company": "Amazon",
+      "position": "Java Developer",
+      "location": "Dallas, TX",
+      "status": "Rejected",
+      "dateApplied": "2026-09-29"
+    },
+    {
+      "id": "5L2w-JDAX_Q",
+      "company": "Google",
+      "position": "Software Engineer",
+      "location": "New York, NY",
+      "status": "Offer",
+      "dateApplied": "2026-10-01"
+    },
+    {
+      "id": "9bYB5GyVoW8",
+      "company": "Amazon",
+      "position": "Java Developer",
+      "location": "Norfolk, VA",
+      "status": "Applied",
+      "dateApplied": "2026-10-03"
+    },
+    {
+      "id": "e0QuEnZS8cg",
+      "company": "Test1",
+      "position": "Tester",
+      "location": "Frisco, TX",
+      "status": "Interview",
+      "dateApplied": "2026-10-04"
+    },
+    {
+      "id": "vIwUhx7YAKk",
+      "company": "Test2",
+      "position": "AI Engineer",
+      "location": "Manhattan, NY",
+      "status": "Offer",
+      "dateApplied": "2026-10-05"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

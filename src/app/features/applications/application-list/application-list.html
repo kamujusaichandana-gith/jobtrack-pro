@@ -1,0 +1,193 @@
+<h1>Job Applications</h1>
+
+@if (isLoading) {
+  <p>Loading applications...</p>
+}
+
+@if (errorMessage) {
+  <p>{{ errorMessage }}</p>
+}
+<div class="filters">
+  <input
+    type="text"
+    placeholder="Search company or position..."
+    (input)="searchApplications($any($event.target).value)"
+  >
+  <div class="status-filter">
+    <label>Filter by Status: </label>
+    <select (change)="filterByStatus($any($event.target).value)">
+      <option value="All">All</option>
+      <option value="Applied">Applied</option>
+      <option value="Interview">Interview</option>
+      <option value="Offer">Offer</option>
+      <option value="Rejected">Rejected</option>
+    </select>
+  </div>
+</div>
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Company</th>
+        <th>Position</th>
+        <th>Location</th>
+        <th>Status</th>
+        <th>Date Applied</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (application of filteredApplications; track application.id) {
+        <tr>
+          <td>{{ application.company }}</td>
+          <td>{{ application.position }}</td>
+          <td>{{ application.location }}</td>
+          <td>
+            <span
+              class="status-badge"
+              [class.applied]="application.status === 'Applied'"
+              [class.interview]="application.status === 'Interview'"
+              [class.offer]="application.status === 'Offer'"
+              [class.rejected]="application.status === 'Rejected'"
+            >
+              {{ application.status }}
+            </span>
+          </td>
+          <td>{{ application.dateApplied }}</td>
+
+          <td>
+            <button class="action-view" type="button" (click)="viewApplication(application)">
+              View
+            </button>
+
+            <button class="action-edit" type="button" (click)="editApplication(application)">Edit</button>
+
+            <button class="action-delete" type="button" (click)="deleteApplication(application.id)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
+
+@if (!isLoading && !errorMessage && filteredApplications.length === 0) {
+  <div class="empty-state">
+    <h3>No applications found</h3>
+    <p>Try changing your search or status filter.</p>
+  </div>
+}
+
+@if (selectedApplication) {
+  <section class="detail-card" aria-labelledby="application-details-title">
+    <div class="card-heading">
+      <div>
+        <p class="eyebrow">APPLICATION OVERVIEW</p>
+        <h2 id="application-details-title">Application Details</h2>
+      </div>
+      <button class="secondary-button" type="button" (click)="selectedApplication = null">
+        Close
+      </button>
+    </div>
+
+    <dl class="detail-grid">
+      <div>
+        <dt>Company</dt>
+        <dd>{{ selectedApplication.company }}</dd>
+      </div>
+      <div>
+        <dt>Position</dt>
+        <dd>{{ selectedApplication.position }}</dd>
+      </div>
+      <div>
+        <dt>Location</dt>
+        <dd>{{ selectedApplication.location }}</dd>
+      </div>
+      <div>
+        <dt>Status</dt>
+        <dd>
+          <span
+            class="status-badge"
+            [class.applied]="selectedApplication.status === 'Applied'"
+            [class.interview]="selectedApplication.status === 'Interview'"
+            [class.offer]="selectedApplication.status === 'Offer'"
+            [class.rejected]="selectedApplication.status === 'Rejected'"
+          >{{ selectedApplication.status }}</span>
+        </dd>
+      </div>
+      <div>
+        <dt>Date Applied</dt>
+        <dd>{{ selectedApplication.dateApplied }}</dd>
+      </div>
+    </dl>
+  </section>
+}
+
+@if (editingApplication) {
+  <div class="edit-card">
+    <div class="card-heading">
+      <div>
+        <p class="eyebrow">UPDATE YOUR PIPELINE</p>
+        <h2>Edit Application</h2>
+      </div>
+    </div>
+
+    <div class="edit-grid">
+      <div class="form-group">
+        <label for="edit-company">Company</label>
+        <input
+          id="edit-company"
+          type="text"
+          [value]="editingApplication.company"
+          (input)="editingApplication.company = $any($event.target).value">
+      </div>
+
+      <div class="form-group">
+        <label for="edit-position">Position</label>
+        <input
+          id="edit-position"
+          type="text"
+          [value]="editingApplication.position"
+          (input)="editingApplication.position = $any($event.target).value">
+      </div>
+
+      <div class="form-group">
+        <label for="edit-location">Location</label>
+        <input
+          id="edit-location"
+          type="text"
+          [value]="editingApplication.location"
+          (input)="editingApplication.location = $any($event.target).value">
+      </div>
+
+      <div class="form-group">
+        <label for="edit-status">Status</label>
+        <select
+          id="edit-status"
+          [value]="editingApplication.status"
+          (change)="editingApplication.status = $any($event.target).value">
+          <option value="Applied">Applied</option>
+          <option value="Interview">Interview</option>
+          <option value="Offer">Offer</option>
+          <option value="Rejected">Rejected</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="edit-date-applied">Date Applied</label>
+        <input
+          id="edit-date-applied"
+          type="date"
+          [value]="editingApplication.dateApplied"
+          (input)="editingApplication.dateApplied = $any($event.target).value">
+      </div>
+    </div>
+
+    <div class="edit-actions">
+      <button class="primary-button" type="button" (click)="saveApplication()">Save Changes</button>
+      <button class="secondary-button" type="button" (click)="editingApplication = null">Cancel</button>
+    </div>
+  </div>
+}

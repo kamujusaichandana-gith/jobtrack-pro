@@ -1,0 +1,92 @@
+<h2>Add Application</h2>
+
+<form
+  [formGroup]="applicationForm"
+  (ngSubmit)="onSubmit()"
+  class="application-form"
+>
+  <div class="form-group">
+    <label>Company</label>
+    <input
+      type="text"
+      formControlName="company"
+      placeholder="e.g. Google"
+    >
+
+    @if (
+      applicationForm.controls.company.invalid &&
+      applicationForm.controls.company.touched
+    ) {
+      <small>Company is required.</small>
+    }
+  </div>
+
+  <div class="form-group">
+    <label>Position</label>
+    <input
+      type="text"
+      formControlName="position"
+      placeholder="e.g. Frontend Developer"
+    >
+
+    @if (
+      applicationForm.controls.position.invalid &&
+      applicationForm.controls.position.touched
+    ) {
+      <small>Position is required.</small>
+    }
+  </div>
+
+  <div class="form-group">
+    <label>Location</label>
+    <input
+      type="text"
+      formControlName="location"
+      placeholder="e.g. Dallas, TX"
+    >
+
+    @if (
+      applicationForm.controls.location.invalid &&
+      applicationForm.controls.location.touched
+    ) {
+      <small>Location is required.</small>
+    }
+  </div>
+
+  <div class="form-group">
+    <label>Status</label>
+
+    <select formControlName="status">
+      <option value="Applied">Applied</option>
+      <option value="Interview">Interview</option>
+      <option value="Offer">Offer</option>
+      <option value="Rejected">Rejected</option>
+    </select>
+
+    @if (
+      applicationForm.controls.status.invalid &&
+      applicationForm.controls.status.touched
+    ) {
+      <small>Status is required.</small>
+    }
+  </div>
+
+  <div class="form-group">
+    <label>Date Applied</label>
+    <input
+      type="date"
+      formControlName="dateApplied"
+    >
+
+    @if (
+      applicationForm.controls.dateApplied.invalid &&
+      applicationForm.controls.dateApplied.touched
+    ) {
+      <small>Date Applied is required.</small>
+    }
+  </div>
+
+  <button type="submit">
+    Add Application
+  </button>
+</form>

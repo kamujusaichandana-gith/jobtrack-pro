@@ -1,0 +1,140 @@
+<section class="dashboard">
+  <header class="page-heading">
+    <div>
+      <p class="eyebrow">YOUR JOB SEARCH, IN FOCUS</p>
+      <h1>Good things are in motion.</h1>
+      <p class="heading-note">A clear view of every opportunity you are pursuing.</p>
+    </div>
+    <a class="primary-action" routerLink="/applications/add">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+      New application
+    </a>
+  </header>
+
+  <section class="metrics" aria-label="Application overview">
+    <article class="metric-card metric-total">
+      <div class="metric-topline">
+        <span>Total applications</span>
+        <span class="metric-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="17" rx="2" /><path d="M8 4V2.5h8V4M8 9h8M8 13h5" /></svg>
+        </span>
+      </div>
+      <strong>{{ totalApplications() }}</strong>
+      <span class="metric-footnote">Opportunities in your pipeline</span>
+    </article>
+
+    <article class="metric-card metric-interviews">
+      <div class="metric-topline">
+        <span>Interviews</span>
+        <span class="metric-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M20 11.5a7.5 7.5 0 0 1-8 7.5 8.6 8.6 0 0 1-3.5-.7L4 20l1.4-3.5A7.1 7.1 0 0 1 4 12c0-4.1 3.6-7.5 8-7.5s8 3.1 8 7Z" /><path d="M8.5 12h.01M12 12h.01M15.5 12h.01" /></svg>
+        </span>
+      </div>
+      <strong>{{ totalInterviews() }}</strong>
+      <span class="metric-footnote">Conversations underway</span>
+    </article>
+
+    <article class="metric-card metric-offers">
+      <div class="metric-topline">
+        <span>Offers</span>
+        <span class="metric-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="m12 3 2.6 5.3 5.9.9-4.3 4.2 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.2 5.9-.9L12 3Z" /></svg>
+        </span>
+      </div>
+      <strong>{{ totalOffers() }}</strong>
+      <span class="metric-footnote">A little closer to your next step</span>
+    </article>
+
+    <article class="metric-card metric-response">
+      <div class="metric-topline">
+        <span>Positive response</span>
+        <span class="metric-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 16.5 9 11l3.5 3.5L20 7" /><path d="M14 7h6v6" /></svg>
+        </span>
+      </div>
+      <strong>{{ responseRate() }}<small>%</small></strong>
+      <span class="metric-footnote">Interviews and offers</span>
+    </article>
+  </section>
+
+  <section class="dashboard-grid">
+    <article class="panel activity-panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">THE LAST SEVEN DAYS</p>
+          <h2>Application activity</h2>
+        </div>
+        <span class="chart-key"><i></i> Applications</span>
+      </div>
+
+      <div class="activity-chart" role="img" aria-label="Applications submitted over the last seven days">
+        @for (day of weeklyActivity(); track day.label; let index = $index) {
+          <div class="chart-column">
+            <span class="bar-count">{{ day.count || '' }}</span>
+            <div class="bar-track">
+              <div class="bar-fill" [style.height.%]="day.height" [style.animation-delay.ms]="index * 70"></div>
+            </div>
+            <span class="day-label">{{ day.label }}</span>
+          </div>
+        }
+      </div>
+    </article>
+
+    <article class="panel pipeline-panel">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">WHERE THINGS STAND</p>
+          <h2>Your pipeline</h2>
+        </div>
+        <span class="pipeline-total">{{ totalApplications() }} total</span>
+      </div>
+
+      <div class="pipeline-list">
+        @for (status of statusMetrics(); track status.label) {
+          <div class="pipeline-row">
+            <div class="pipeline-label">
+              <span class="status-dot" [class]="'status-dot ' + status.color"></span>
+              <span>{{ status.label }}</span>
+              <strong>{{ status.count }}</strong>
+            </div>
+            <div class="pipeline-track">
+              <span [class]="'pipeline-fill ' + status.color" [style.width.%]="status.width"></span>
+            </div>
+          </div>
+        }
+      </div>
+      <a class="text-link" routerLink="/applications">View all applications <span aria-hidden="true">&#8594;</span></a>
+    </article>
+  </section>
+
+  <section class="panel recent-panel">
+    <div class="panel-heading recent-heading">
+      <div>
+        <p class="eyebrow">KEEP THE MOMENTUM</p>
+        <h2>Recent applications</h2>
+      </div>
+      <a class="text-link" routerLink="/applications">See all <span aria-hidden="true">&#8594;</span></a>
+    </div>
+
+    @if (recentApplications().length) {
+      <div class="recent-list">
+        @for (application of recentApplications(); track application.id) {
+          <div class="recent-row">
+            <span class="company-mark" aria-hidden="true">{{ application.company.slice(0, 1) }}</span>
+            <div class="application-info">
+              <strong>{{ application.company }}</strong>
+              <span>{{ application.position }}</span>
+            </div>
+            <span class="recent-date">{{ application.dateApplied }}</span>
+            <span class="recent-status" [class]="'recent-status ' + application.status.toLowerCase()">{{ application.status }}</span>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="empty-state">
+        <p>Your next opportunity starts here.</p>
+        <a class="text-link" routerLink="/applications/add">Add your first application <span aria-hidden="true">&#8594;</span></a>
+      </div>
+    }
+  </section>
+</section>

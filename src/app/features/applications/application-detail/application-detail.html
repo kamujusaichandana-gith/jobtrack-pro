@@ -1,0 +1,23 @@
+<h1>Application Details</h1>
+
+@if (application) {
+
+  <p><strong>Company:</strong> {{ application.company }}</p>
+
+  <p><strong>Position:</strong> {{ application.position }}</p>
+
+  <p><strong>Location:</strong> {{ application.location }}</p>
+
+  <p><strong>Status:</strong> {{ application.status }}</p>
+
+  <p><strong>Date Applied:</strong> {{ application.dateApplied }}</p>
+
+} @else {
+
+  <p>Application not found.</p>
+
+}
+
+<button (click)="goBack()">
+  Back to Applications
+</button>

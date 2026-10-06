@@ -1,0 +1,72 @@
+<div class="login-container">
+  <div class="login-card">
+    <a class="login-brand" routerLink="/login" aria-label="JobTrack Pro">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M4 17.5 9 12l3.5 3.5L20 7" />
+          <path d="M14.5 7H20v5.5" />
+        </svg>
+      </span>
+      <span>JobTrack<span class="brand-accent">Pro</span></span>
+    </a>
+
+    <div class="login-heading">
+      <p class="eyebrow">YOUR JOB SEARCH, IN FOCUS</p>
+      <h1>Welcome back.</h1>
+      <p class="subtitle">Sign in to pick up where you left off.</p>
+    </div>
+
+    <form (ngSubmit)="login()" novalidate>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <div class="input-wrap">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="3.5" y="5" width="17" height="14" rx="2" />
+            <path d="m4.5 7 7.5 6 7.5-6" />
+          </svg>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="name@example.com"
+            autocomplete="email"
+            [(ngModel)]="email"
+            required
+          >
+        </div>
+        @if (submitted && !email.trim()) {
+          <small role="alert">Email is required.</small>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-wrap">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="4.5" y="10" width="15" height="11" rx="2" />
+            <path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3" />
+          </svg>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            [(ngModel)]="password"
+            required
+          >
+        </div>
+        @if (submitted && !password.trim()) {
+          <small role="alert">Password is required.</small>
+        }
+      </div>
+
+      <button type="submit">
+        <span>Continue to dashboard</span>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 12h14M13 6l6 6-6 6" />
+        </svg>
+      </button>
+    </form>
+  </div>
+</div>
