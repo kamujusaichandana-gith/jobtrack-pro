@@ -156,8 +156,6 @@ The production output is written to `dist/`. No end-to-end test script is curren
 
 ## Screenshots
 
-Screenshot files are not included yet. Add them to `docs/screenshots/` using these filenames for the images to display here.
-
 ### Login
 
 ![JobTrack Pro Login](docs/screenshots/login.png)
