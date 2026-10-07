@@ -126,6 +126,8 @@ export class ApplicationList implements OnInit {
     }
     this.applicationService.deleteApplication(id).subscribe({
       next: () => {
+        this.selectedApplication = null;
+        this.editingApplication = null;
 
         // Reload the table after deleting
         this.loadApplications();
