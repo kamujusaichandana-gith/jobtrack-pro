@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 export class ApplicationService {
   private http = inject(HttpClient);
 
-  private apiUrl = 'http://localhost:3000/applications';
+  private apiUrl = 'https://jobtrack-pro-api-tnkd.onrender.com/applications';
   applications = signal<Application[]>([]);
 
     totalApplications = computed(() => {
