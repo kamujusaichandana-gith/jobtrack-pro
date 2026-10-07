@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: jobtrack-pro
+    runtime: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist/jobtrack-pro/browser
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
